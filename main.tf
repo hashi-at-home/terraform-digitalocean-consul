@@ -163,6 +163,12 @@ resource "digitalocean_loadbalancer" "consul" {
     path     = "/v1/health/service/consul"
   }
 
+  healthcheck {
+    port     = 8300
+    protocol = "tcp"
+    path     = "/"
+  }
+
 }
 
 resource "cloudflare_record" "consul" {
