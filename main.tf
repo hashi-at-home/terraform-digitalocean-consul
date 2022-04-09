@@ -11,7 +11,7 @@ terraform {
     }
     digitalocean = {
       source  = "digitalocean/digitalocean"
-      version = "~> 2.0"
+      version = "= 2.19.0"
     }
     tls = {
       source  = "hashicorp/tls"
@@ -52,12 +52,33 @@ variable "lb_size_unit" {
   default     = 1
 }
 
+variable "consul_ports" {
+  type        = map(number)
+  description = "Ports to expose Consul on. See https://www.consul.io/docs/install/ports"
+  default = {
+    "dns"      = 8600
+    "http"     = 8500
+    "serf-lan" = 8301
+    "server"   = 8300
+  }
+}
+variable "home_base_ip" {
+  description = "Tailscale IP"
+  type        = string
+}
+
+variable "vpc_cidr" {
+  type        = string
+  description = "VPC internal CIDR for the consul cluster"
+  default     = "10.10.20.0/24"
+}
+
 data "vault_generic_secret" "hashiathome" {
   path = "kv/hashiathome"
 }
 
 data "vault_generic_secret" "do_token" {
-  path = "kv/do"
+  path = "digitalocean/tokens"
 }
 
 # Look up ssh key secret in vault
@@ -69,20 +90,12 @@ data "cloudflare_zone" "hashiathome" {
   name = "hashiatho.me"
 }
 provider "digitalocean" {
-  token             = data.vault_generic_secret.do_token.data["token"]
-  spaces_access_id  = data.vault_generic_secret.do_token.data["access_key_hashi_at_home"]
-  spaces_secret_key = data.vault_generic_secret.do_token.data["secret_key_hashi_at_home"]
+  token = data.vault_generic_secret.do_token.data["terraform"]
 }
 
 provider "cloudflare" {
   api_token            = data.vault_generic_secret.hashiathome.data["cloudflare_api_token"]
   api_user_service_key = data.vault_generic_secret.hashiathome.data["cloudflare_origin_ca_key"]
-}
-
-module "test-space" {
-  selected_region = "🇳🇱"
-  bucket_name     = "terraform-backend-hah"
-  source          = "github.com/hashi-at-home/tfmod-do-space"
 }
 
 # Generate Certificate request
@@ -121,52 +134,41 @@ resource "digitalocean_certificate" "cert" {
 
 # Digital Ocean VPC for droplets
 resource "digitalocean_vpc" "vpc" {
-  name        = "terraform-vpc-hah"
+  name        = "terraform-consul-vpc"
   region      = "ams3"
-  description = "VPC for hashi at home"
-  ip_range    = "10.10.10.0/24"
+  description = "VPC for Consul"
+  ip_range    = var.vpc_cidr
 }
 
-resource "digitalocean_ssh_key" "consul" {
-  name       = var.ssh_key_name
-  public_key = data.vault_generic_secret.ssh_key.data["public_key"]
+data "digitalocean_ssh_key" "test" {
+  name = "test-instances"
 }
 
 resource "digitalocean_loadbalancer" "consul" {
-  name        = var.lb_name
-  size_unit   = var.lb_size_unit
-  region      = "ams3"
-  vpc_uuid    = digitalocean_vpc.vpc.id
-  droplet_tag = "consul-server"
-  forwarding_rule {
-    entry_port     = "80"
-    entry_protocol = "http"
-
-    target_port     = "8500"
-    target_protocol = "http"
-  }
+  algorithm                = "least_connections"
+  redirect_http_to_https   = true
+  enable_backend_keepalive = true
+  name                     = var.lb_name
+  size_unit                = var.lb_size_unit
+  region                   = "ams3"
+  vpc_uuid                 = digitalocean_vpc.vpc.id
+  droplet_tag              = "consul-server"
 
   # HTTPS forwarding rule
   forwarding_rule {
     entry_port     = "443"
     entry_protocol = "https"
 
-    target_port     = 8500
+    target_port     = var.consul_ports.http
     target_protocol = "http"
 
     certificate_name = digitalocean_certificate.cert.name
   }
 
   healthcheck {
-    port     = 8500
+    port     = var.consul_ports.http
     protocol = "http"
     path     = "/v1/health/service/consul"
-  }
-
-  healthcheck {
-    port     = 8300
-    protocol = "tcp"
-    path     = "/"
   }
 
 }
@@ -177,11 +179,21 @@ resource "cloudflare_record" "consul" {
   value   = digitalocean_loadbalancer.consul.ip
   type    = "A"
   ttl     = 60
+}
 
+
+# Add a record for each droplet
+resource "cloudflare_record" "droplets" {
+  count   = 3
+  zone_id = data.cloudflare_zone.hashiathome.id
+  name    = digitalocean_droplet.consul_server[count.index].name
+  value   = digitalocean_droplet.consul_server[count.index].ipv4_address
+  type    = "A"
+  ttl     = 60
 }
 
 data "digitalocean_image" "consul_server" {
-  name = "consul-server"
+  name = "consul-server-droplet"
 }
 
 # Create consul server cluster with 3 nodes
@@ -190,11 +202,73 @@ resource "digitalocean_droplet" "consul_server" {
   name              = "consul-server-${terraform.workspace}-${count.index}"
   image             = data.digitalocean_image.consul_server.id
   region            = "ams3"
-  ssh_keys          = [digitalocean_ssh_key.consul.id]
+  ssh_keys          = [data.digitalocean_ssh_key.test.id]
   size              = "s-1vcpu-1gb"
   backups           = false
   monitoring        = false
   vpc_uuid          = digitalocean_vpc.vpc.id
   tags              = ["consul-server"]
   graceful_shutdown = false
+}
+
+# Add droplet firewalls
+resource "digitalocean_firewall" "droplet_ssh" {
+  name        = "consul-servers-ssh"
+  droplet_ids = digitalocean_droplet.consul_server.*.id
+
+  # For now, allow ssh from anywhere, until we get Tailscale VPN and a bastion
+  inbound_rule {
+
+    protocol   = "tcp"
+    port_range = "22"
+    # My tailscale address
+    source_addresses = [var.home_base_ip]
+  }
+}
+
+resource "digitalocean_firewall" "droplet_consul" {
+  # Allow communication on the internal IP range between consul servers
+  # and the load balancer
+  for_each    = var.consul_ports
+  name        = "consul-servers-${each.key}"
+  droplet_ids = digitalocean_droplet.consul_server.*.id
+  inbound_rule {
+    protocol   = "tcp"
+    port_range = tostring(each.value)
+
+    source_droplet_ids        = digitalocean_droplet.consul_server.*.id
+    source_load_balancer_uids = [digitalocean_loadbalancer.consul.id]
+  }
+}
+
+resource "digitalocean_firewall" "droplet_outbound" {
+  # Allow communication on the internal IP range between consul servers
+  # and the load balancer
+  name        = "consul-outbound"
+  droplet_ids = digitalocean_droplet.consul_server.*.id
+  # Allow all outgoing traffic
+  outbound_rule {
+    protocol              = "tcp"
+    port_range            = "1-65535"
+    destination_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+  outbound_rule {
+    protocol              = "udp"
+    port_range            = "1-65535"
+    destination_addresses = ["0.0.0.0/0", "::/0"]
+  }
+}
+
+# add lb firewalls
+# Apparently you can't apply a cloud firewall to an LB
+# https://docs.digitalocean.com/products/networking/firewalls/#limits
+resource "digitalocean_firewall" "lb" {
+  name = "consul-lb-firewall"
+  # only allow https from home base
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "443"
+    source_addresses = [var.home_base_ip]
+  }
 }
