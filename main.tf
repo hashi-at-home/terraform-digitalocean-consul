@@ -7,7 +7,7 @@ terraform {
     }
     consul = {
       source  = "hashicorp/consul"
-      version = "2.15.0"
+      version = "2.17.0"
     }
     digitalocean = {
       source  = "digitalocean/digitalocean"
