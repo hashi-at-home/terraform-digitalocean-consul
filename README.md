@@ -41,8 +41,9 @@ No modules.
 | [digitalocean_firewall.lb](https://registry.terraform.io/providers/digitalocean/digitalocean/2.28.1/docs/resources/firewall) | resource |
 | [digitalocean_loadbalancer.consul](https://registry.terraform.io/providers/digitalocean/digitalocean/2.28.1/docs/resources/loadbalancer) | resource |
 | [digitalocean_vpc.vpc](https://registry.terraform.io/providers/digitalocean/digitalocean/2.28.1/docs/resources/vpc) | resource |
+| [tls_cert_request.consul](https://registry.terraform.io/providers/hashicorp/tls/4.0.4/docs/resources/cert_request) | resource |
+| [tls_private_key.csr](https://registry.terraform.io/providers/hashicorp/tls/4.0.4/docs/resources/private_key) | resource |
 | [cloudflare_zone.hashiathome](https://registry.terraform.io/providers/cloudflare/cloudflare/4.10.0/docs/data-sources/zone) | data source |
-| [cloudflare_zone.hashiathome](https://registry.terraform.io/providers/cloudflare/cloudflare/3.35.0/docs/data-sources/zone) | data source |
 | [digitalocean_image.consul_server](https://registry.terraform.io/providers/digitalocean/digitalocean/2.28.1/docs/data-sources/image) | data source |
 | [digitalocean_ssh_key.test](https://registry.terraform.io/providers/digitalocean/digitalocean/2.28.1/docs/data-sources/ssh_key) | data source |
 | [vault_generic_secret.do_token](https://registry.terraform.io/providers/hashicorp/vault/3.17.0/docs/data-sources/generic_secret) | data source |
