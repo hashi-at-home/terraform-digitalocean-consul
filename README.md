@@ -7,7 +7,7 @@ Terraform module for Hashicorp Consul on Digital Ocean
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.0 |
-| <a name="requirement_cloudflare"></a> [cloudflare](#requirement\_cloudflare) | 4.15.0 |
+| <a name="requirement_cloudflare"></a> [cloudflare](#requirement\_cloudflare) | 4.16.0 |
 | <a name="requirement_consul"></a> [consul](#requirement\_consul) | 2.18.0 |
 | <a name="requirement_digitalocean"></a> [digitalocean](#requirement\_digitalocean) | 2.30.0 |
 | <a name="requirement_tls"></a> [tls](#requirement\_tls) | 4.0.4 |
@@ -30,9 +30,9 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [cloudflare_origin_ca_certificate.consul](https://registry.terraform.io/providers/cloudflare/cloudflare/4.15.0/docs/resources/origin_ca_certificate) | resource |
-| [cloudflare_record.consul](https://registry.terraform.io/providers/cloudflare/cloudflare/4.15.0/docs/resources/record) | resource |
-| [cloudflare_record.droplets](https://registry.terraform.io/providers/cloudflare/cloudflare/4.15.0/docs/resources/record) | resource |
+| [cloudflare_origin_ca_certificate.consul](https://registry.terraform.io/providers/cloudflare/cloudflare/4.16.0/docs/resources/origin_ca_certificate) | resource |
+| [cloudflare_record.consul](https://registry.terraform.io/providers/cloudflare/cloudflare/4.16.0/docs/resources/record) | resource |
+| [cloudflare_record.droplets](https://registry.terraform.io/providers/cloudflare/cloudflare/4.16.0/docs/resources/record) | resource |
 | [digitalocean_certificate.cert](https://registry.terraform.io/providers/digitalocean/digitalocean/2.30.0/docs/resources/certificate) | resource |
 | [digitalocean_droplet.consul_server](https://registry.terraform.io/providers/digitalocean/digitalocean/2.30.0/docs/resources/droplet) | resource |
 | [digitalocean_firewall.droplet_consul](https://registry.terraform.io/providers/digitalocean/digitalocean/2.30.0/docs/resources/firewall) | resource |
@@ -43,7 +43,7 @@ No modules.
 | [digitalocean_vpc.vpc](https://registry.terraform.io/providers/digitalocean/digitalocean/2.30.0/docs/resources/vpc) | resource |
 | [tls_cert_request.consul](https://registry.terraform.io/providers/hashicorp/tls/4.0.4/docs/resources/cert_request) | resource |
 | [tls_private_key.csr](https://registry.terraform.io/providers/hashicorp/tls/4.0.4/docs/resources/private_key) | resource |
-| [cloudflare_zone.hashiathome](https://registry.terraform.io/providers/cloudflare/cloudflare/4.15.0/docs/data-sources/zone) | data source |
+| [cloudflare_zone.hashiathome](https://registry.terraform.io/providers/cloudflare/cloudflare/4.16.0/docs/data-sources/zone) | data source |
 | [digitalocean_image.consul_server](https://registry.terraform.io/providers/digitalocean/digitalocean/2.30.0/docs/data-sources/image) | data source |
 | [digitalocean_ssh_key.test](https://registry.terraform.io/providers/digitalocean/digitalocean/2.30.0/docs/data-sources/ssh_key) | data source |
 | [vault_generic_secret.do_token](https://registry.terraform.io/providers/hashicorp/vault/3.20.1/docs/data-sources/generic_secret) | data source |
