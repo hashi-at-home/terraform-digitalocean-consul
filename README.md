@@ -17,7 +17,7 @@ Terraform module for Hashicorp Consul on Digital Ocean
 
 | Name | Version |
 |------|---------|
-| <a name="provider_cloudflare"></a> [cloudflare](#provider\_cloudflare) | 4.15.0 |
+| <a name="provider_cloudflare"></a> [cloudflare](#provider\_cloudflare) | 4.16.0 |
 | <a name="provider_digitalocean"></a> [digitalocean](#provider\_digitalocean) | 2.30.0 |
 | <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.4 |
 | <a name="provider_vault"></a> [vault](#provider\_vault) | 3.20.1 |
