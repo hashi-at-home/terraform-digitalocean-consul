@@ -11,7 +11,7 @@ repos:
       - id: check-yaml
       - id: check-added-large-files
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.87.1
+    rev: v1.88.1
     hooks:
       - id: checkov
       - id: terraform_validate
@@ -23,7 +23,7 @@ repos:
         args: ["markdown", ".", "--output-file", "README.md"]
 
   - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
-    rev: v9.11.0
+    rev: v9.13.0
     hooks:
       - id: commitlint
         stages: [commit-msg]
