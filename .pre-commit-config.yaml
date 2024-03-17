@@ -13,9 +13,10 @@ repos:
   - repo: https://github.com/antonbabenko/pre-commit-terraform
     rev: v1.88.1
     hooks:
-      - id: checkov
+      - id: terraform_checkov
       - id: terraform_validate
       - id: terraform_fmt
+      - id: terraform_trivy
   - repo: https://github.com/terraform-docs/terraform-docs
     rev: v0.17.0
     hooks:
@@ -34,3 +35,9 @@ repos:
       - id: detect-secrets
         args: ['--baseline', '.secrets.baseline']
         exclude: ".terraform.lock.hcl"
+ci:
+  skip:
+    - terraform_checkov
+    - terraform_validate
+    - terraform_fmt
+    - terraform_trivy
