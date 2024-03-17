@@ -40,3 +40,4 @@ ci:
     - terraform_checkov
     - terraform_validate
     - terraform_fmt
+    - terraform_trivy
