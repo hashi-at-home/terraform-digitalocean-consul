@@ -9,7 +9,7 @@ Terraform module for Hashicorp Consul on Digital Ocean
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.0 |
 | <a name="requirement_cloudflare"></a> [cloudflare](#requirement\_cloudflare) | 4.30.0 |
 | <a name="requirement_consul"></a> [consul](#requirement\_consul) | 2.20.0 |
-| <a name="requirement_digitalocean"></a> [digitalocean](#requirement\_digitalocean) | 2.36.0 |
+| <a name="requirement_digitalocean"></a> [digitalocean](#requirement\_digitalocean) | 2.37.0 |
 | <a name="requirement_tls"></a> [tls](#requirement\_tls) | 4.0.5 |
 | <a name="requirement_vault"></a> [vault](#requirement\_vault) | 4.2.0 |
 
@@ -18,7 +18,7 @@ Terraform module for Hashicorp Consul on Digital Ocean
 | Name | Version |
 |------|---------|
 | <a name="provider_cloudflare"></a> [cloudflare](#provider\_cloudflare) | 4.30.0 |
-| <a name="provider_digitalocean"></a> [digitalocean](#provider\_digitalocean) | 2.36.0 |
+| <a name="provider_digitalocean"></a> [digitalocean](#provider\_digitalocean) | 2.37.0 |
 | <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.5 |
 | <a name="provider_vault"></a> [vault](#provider\_vault) | 4.2.0 |
 
