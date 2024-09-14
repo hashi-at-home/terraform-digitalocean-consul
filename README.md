@@ -10,7 +10,7 @@ Terraform module for Hashicorp Consul on Digital Ocean
 | <a name="requirement_cloudflare"></a> [cloudflare](#requirement\_cloudflare) | 4.40.0 |
 | <a name="requirement_consul"></a> [consul](#requirement\_consul) | 2.21.0 |
 | <a name="requirement_digitalocean"></a> [digitalocean](#requirement\_digitalocean) | 2.41.0 |
-| <a name="requirement_tls"></a> [tls](#requirement\_tls) | 4.0.5 |
+| <a name="requirement_tls"></a> [tls](#requirement\_tls) | 4.0.6 |
 | <a name="requirement_vault"></a> [vault](#requirement\_vault) | 4.4.0 |
 
 ## Providers
@@ -19,7 +19,7 @@ Terraform module for Hashicorp Consul on Digital Ocean
 |------|---------|
 | <a name="provider_cloudflare"></a> [cloudflare](#provider\_cloudflare) | 4.40.0 |
 | <a name="provider_digitalocean"></a> [digitalocean](#provider\_digitalocean) | 2.40.0 |
-| <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.5 |
+| <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.6 |
 | <a name="provider_vault"></a> [vault](#provider\_vault) | 4.4.0 |
 
 ## Modules
@@ -41,8 +41,8 @@ No modules.
 | [digitalocean_firewall.lb](https://registry.terraform.io/providers/digitalocean/digitalocean/2.41.0/docs/resources/firewall) | resource |
 | [digitalocean_loadbalancer.consul](https://registry.terraform.io/providers/digitalocean/digitalocean/2.41.0/docs/resources/loadbalancer) | resource |
 | [digitalocean_vpc.vpc](https://registry.terraform.io/providers/digitalocean/digitalocean/2.41.0/docs/resources/vpc) | resource |
-| [tls_cert_request.consul](https://registry.terraform.io/providers/hashicorp/tls/4.0.5/docs/resources/cert_request) | resource |
-| [tls_private_key.csr](https://registry.terraform.io/providers/hashicorp/tls/4.0.5/docs/resources/private_key) | resource |
+| [tls_cert_request.consul](https://registry.terraform.io/providers/hashicorp/tls/4.0.6/docs/resources/cert_request) | resource |
+| [tls_private_key.csr](https://registry.terraform.io/providers/hashicorp/tls/4.0.6/docs/resources/private_key) | resource |
 | [cloudflare_zone.hashiathome](https://registry.terraform.io/providers/cloudflare/cloudflare/4.40.0/docs/data-sources/zone) | data source |
 | [digitalocean_image.consul_server](https://registry.terraform.io/providers/digitalocean/digitalocean/2.41.0/docs/data-sources/image) | data source |
 | [digitalocean_ssh_key.test](https://registry.terraform.io/providers/digitalocean/digitalocean/2.41.0/docs/data-sources/ssh_key) | data source |
