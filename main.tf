@@ -11,11 +11,11 @@ terraform {
     }
     digitalocean = {
       source  = "digitalocean/digitalocean"
-      version = "2.40.0"
+      version = "2.41.0"
     }
     tls = {
       source  = "hashicorp/tls"
-      version = "4.0.5"
+      version = "4.0.6"
     }
     vault = {
       source  = "hashicorp/vault"
