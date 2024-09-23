@@ -54,7 +54,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_consul_ports"></a> [consul\_ports](#input\_consul\_ports) | Ports to expose Consul on. See https://www.consul.io/docs/install/ports | `map(number)` | <pre>{<br>  "dns": 8600,<br>  "http": 8500,<br>  "serf-lan": 8301,<br>  "server": 8300<br>}</pre> | no |
+| <a name="input_consul_ports"></a> [consul\_ports](#input\_consul\_ports) | Ports to expose Consul on. See https://www.consul.io/docs/install/ports | `map(number)` | <pre>{<br/>  "dns": 8600,<br/>  "http": 8500,<br/>  "serf-lan": 8301,<br/>  "server": 8300<br/>}</pre> | no |
 | <a name="input_home_base_ip"></a> [home\_base\_ip](#input\_home\_base\_ip) | Tailscale IP | `string` | n/a | yes |
 | <a name="input_lb_name"></a> [lb\_name](#input\_lb\_name) | Name of the load balancer | `string` | `"consul-lb"` | no |
 | <a name="input_lb_size_unit"></a> [lb\_size\_unit](#input\_lb\_size\_unit) | Size unit for the load balancer | `number` | `1` | no |
