@@ -11,7 +11,7 @@ Terraform module for Hashicorp Consul on Digital Ocean
 | <a name="requirement_consul"></a> [consul](#requirement\_consul) | 2.21.0 |
 | <a name="requirement_digitalocean"></a> [digitalocean](#requirement\_digitalocean) | 2.49.1 |
 | <a name="requirement_tls"></a> [tls](#requirement\_tls) | 4.0.6 |
-| <a name="requirement_vault"></a> [vault](#requirement\_vault) | 4.6.0 |
+| <a name="requirement_vault"></a> [vault](#requirement\_vault) | 4.7.0 |
 
 ## Providers
 
@@ -46,9 +46,9 @@ No modules.
 | [cloudflare_zone.hashiathome](https://registry.terraform.io/providers/cloudflare/cloudflare/5.1.0/docs/data-sources/zone) | data source |
 | [digitalocean_image.consul_server](https://registry.terraform.io/providers/digitalocean/digitalocean/2.49.1/docs/data-sources/image) | data source |
 | [digitalocean_ssh_key.test](https://registry.terraform.io/providers/digitalocean/digitalocean/2.49.1/docs/data-sources/ssh_key) | data source |
-| [vault_generic_secret.do_token](https://registry.terraform.io/providers/hashicorp/vault/4.6.0/docs/data-sources/generic_secret) | data source |
-| [vault_generic_secret.hashiathome](https://registry.terraform.io/providers/hashicorp/vault/4.6.0/docs/data-sources/generic_secret) | data source |
-| [vault_generic_secret.ssh_key](https://registry.terraform.io/providers/hashicorp/vault/4.6.0/docs/data-sources/generic_secret) | data source |
+| [vault_generic_secret.do_token](https://registry.terraform.io/providers/hashicorp/vault/4.7.0/docs/data-sources/generic_secret) | data source |
+| [vault_generic_secret.hashiathome](https://registry.terraform.io/providers/hashicorp/vault/4.7.0/docs/data-sources/generic_secret) | data source |
+| [vault_generic_secret.ssh_key](https://registry.terraform.io/providers/hashicorp/vault/4.7.0/docs/data-sources/generic_secret) | data source |
 
 ## Inputs
 
