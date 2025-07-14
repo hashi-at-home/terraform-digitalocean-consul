@@ -44,8 +44,8 @@ No modules.
 | [tls_cert_request.consul](https://registry.terraform.io/providers/hashicorp/tls/4.1.0/docs/resources/cert_request) | resource |
 | [tls_private_key.csr](https://registry.terraform.io/providers/hashicorp/tls/4.1.0/docs/resources/private_key) | resource |
 | [cloudflare_zone.hashiathome](https://registry.terraform.io/providers/cloudflare/cloudflare/5.6.0/docs/data-sources/zone) | data source |
-| [digitalocean_image.consul_server](https://registry.terraform.io/providers/digitalocean/digitalocean/2.58.0/docs/data-sources/image) | data source |
-| [digitalocean_ssh_key.test](https://registry.terraform.io/providers/digitalocean/digitalocean/2.58.0/docs/data-sources/ssh_key) | data source |
+| [digitalocean_image.consul_server](https://registry.terraform.io/providers/digitalocean/digitalocean/2.59.0/docs/data-sources/image) | data source |
+| [digitalocean_ssh_key.test](https://registry.terraform.io/providers/digitalocean/digitalocean/2.59.0/docs/data-sources/ssh_key) | data source |
 | [vault_generic_secret.do_token](https://registry.terraform.io/providers/hashicorp/vault/5.1.0/docs/data-sources/generic_secret) | data source |
 | [vault_generic_secret.hashiathome](https://registry.terraform.io/providers/hashicorp/vault/5.1.0/docs/data-sources/generic_secret) | data source |
 | [vault_generic_secret.ssh_key](https://registry.terraform.io/providers/hashicorp/vault/5.1.0/docs/data-sources/generic_secret) | data source |
