@@ -3,7 +3,7 @@ terraform {
   required_providers {
     cloudflare = {
       source  = "cloudflare/cloudflare"
-      version = "5.11.0"
+      version = "5.12.0"
     }
     consul = {
       source  = "hashicorp/consul"
@@ -11,7 +11,7 @@ terraform {
     }
     digitalocean = {
       source  = "digitalocean/digitalocean"
-      version = "2.67.0"
+      version = "2.68.0"
     }
     tls = {
       source  = "hashicorp/tls"
@@ -19,7 +19,7 @@ terraform {
     }
     vault = {
       source  = "hashicorp/vault"
-      version = "5.3.0"
+      version = "5.4.0"
     }
   }
 
