@@ -5,7 +5,7 @@ Terraform module for Hashicorp Consul on Digital Ocean
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.0 |
 | <a name="requirement_cloudflare"></a> [cloudflare](#requirement\_cloudflare) | 5.18.0 |
 | <a name="requirement_consul"></a> [consul](#requirement\_consul) | 2.23.0 |
@@ -16,7 +16,7 @@ Terraform module for Hashicorp Consul on Digital Ocean
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_cloudflare"></a> [cloudflare](#provider\_cloudflare) | 5.18.0 |
 | <a name="provider_digitalocean"></a> [digitalocean](#provider\_digitalocean) | 2.81.0 |
 | <a name="provider_tls"></a> [tls](#provider\_tls) | 4.2.1 |
@@ -29,7 +29,7 @@ No modules.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [cloudflare_origin_ca_certificate.consul](https://registry.terraform.io/providers/cloudflare/cloudflare/5.18.0/docs/resources/origin_ca_certificate) | resource |
 | [cloudflare_record.consul](https://registry.terraform.io/providers/cloudflare/cloudflare/5.18.0/docs/resources/record) | resource |
 | [cloudflare_record.droplets](https://registry.terraform.io/providers/cloudflare/cloudflare/5.18.0/docs/resources/record) | resource |
@@ -53,7 +53,7 @@ No modules.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_consul_ports"></a> [consul\_ports](#input\_consul\_ports) | Ports to expose Consul on. See https://www.consul.io/docs/install/ports | `map(number)` | <pre>{<br/>  "dns": 8600,<br/>  "http": 8500,<br/>  "serf-lan": 8301,<br/>  "server": 8300<br/>}</pre> | no |
 | <a name="input_home_base_ip"></a> [home\_base\_ip](#input\_home\_base\_ip) | Tailscale IP | `string` | n/a | yes |
 | <a name="input_lb_name"></a> [lb\_name](#input\_lb\_name) | Name of the load balancer | `string` | `"consul-lb"` | no |
