@@ -1,0 +1,6 @@
+[settings]
+auto_install = true
+
+[tools]
+prek = "0.3.9"
+terraform = "1.14.8"
