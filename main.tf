@@ -87,7 +87,9 @@ data "vault_generic_secret" "ssh_key" {
 }
 
 data "cloudflare_zone" "hashiathome" {
-  name = "hashiatho.me"
+  filter {
+    name = "hashiatho.me"
+  }
 }
 provider "digitalocean" {
   token = data.vault_generic_secret.do_token.data["terraform"]
@@ -175,10 +177,11 @@ resource "digitalocean_loadbalancer" "consul" {
 
 resource "cloudflare_record" "consul" {
   zone_id = data.cloudflare_zone.hashiathome.id
-  name    = "consul-${terraform.workspace}"
-  value   = digitalocean_loadbalancer.consul.ip
-  type    = "A"
-  ttl     = 60
+  # cloudflare_zone = data.cloudflare_zone.hashiathome.name
+  name  = "consul-${terraform.workspace}"
+  value = digitalocean_loadbalancer.consul.ip
+  type  = "A"
+  ttl   = 60
 }
 
 
@@ -248,15 +251,16 @@ resource "digitalocean_firewall" "droplet_outbound" {
   droplet_ids = digitalocean_droplet.consul_server.*.id
   # Allow all outgoing traffic
   outbound_rule {
-    protocol              = "tcp"
-    port_range            = "1-65535"
-    destination_addresses = ["0.0.0.0/0", "::/0"]
+    protocol   = "tcp"
+    port_range = "1-65535"
+    # destination_addresses = ["0.0.0.0/0", "::/0"]
   }
 
   outbound_rule {
-    protocol              = "udp"
-    port_range            = "1-65535"
-    destination_addresses = ["0.0.0.0/0", "::/0"]
+    protocol   = "udp"
+    port_range = "1-65535"
+    # destination_addresses = ["0.0.0.0/0", "::/0"]
+
   }
 }
 
@@ -272,3 +276,5 @@ resource "digitalocean_firewall" "lb" {
     source_addresses = [var.home_base_ip]
   }
 }
+
+resource "null_resource" "example" {}
