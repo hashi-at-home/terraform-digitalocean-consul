@@ -11,7 +11,7 @@ terraform {
     }
     digitalocean = {
       source  = "digitalocean/digitalocean"
-      version = "2.107.0"
+      version = "2.108.0"
     }
     tls = {
       source  = "hashicorp/tls"
